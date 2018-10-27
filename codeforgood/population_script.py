@@ -122,5 +122,9 @@ if __name__ == '__main__':
     import django
     django.setup()
     from codeforgood.models import Locations, Tags, Location_Tags
-    PopulateTags(3)
+    #PopulateTags(3)
+
+    print(Locations.objects.filter(id__lt=5))
+
+
     print("Population Script complete")
