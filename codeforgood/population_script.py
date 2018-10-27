@@ -3,6 +3,7 @@
 import xlsxwriter
 import random
 
+
 # format of the Location lists
 # [id, name, coords, location, contact name, contact num, contact email, website,
 # cost,	description, Tags(strings delim by ;), 
@@ -33,7 +34,6 @@ data = (
 )
 
 data = (
- [1, 2, 3],
  ['St. James the lass church hall 1', 'St. James the lass church hall 2', 'St. James the lass church hall 3'],
  ["55581, -4.292699", "55.873581, -4.292699", "55.873581, -4.292699"],
  ["Penicuik"],
@@ -45,43 +45,50 @@ data = (
  ["Hall for hire, welcome to use if available, contact us for more"],
  ["Sight", "Hearing", "Sound", "Music", "safe space", "flexible", "quiet", "solitary", "indoors"],
  ["parking", "wheelchair", "safe"],
- [""],
  ["10/10/1998"],
  [""])
- 
 
+import os
+from codeforgood.models import Locations
+
+def PopulateDjang(n):
+    for row in range(n):
+        entry = [""] * len(data)
+        for i in range(len(data)):
+            entry[i] = data[i][random.randint(0,len(data[i])-1)]
+        p = Locations(name = entry[0], coords = entry[1], location = entry[2], contact_name = entry[3], contact_num = entry[4],
+        contact_email = entry[5], website = entry[6], cost = entry[7], description = entry[8], tags = entry[9], accessibility = entry[10],
+        date = entry[11], user_id = entry[12])
+        p.save()
+    print(Locations.objects.all())
 
 def populateNew(n):
-	workbook = xlsxwriter.Workbook('Locations.xlsx')
-	locations = workbook.add_worksheet()
-	
-	for row in range(n):
-		for i in range(len(data)):
-			locations.write(row,i, data[i][random.randint(0,len(data[i])-1)])
-	workbook.close()
-	return()
-	
+    workbook = xlsxwriter.Workbook('Locations.xlsx')
+    locations = workbook.add_worksheet()
+    workbook.close()
+    return()
 
 def populate():
-	workbook = xlsxwriter.Workbook('Locations.xlsx')
-	locations = workbook.add_worksheet()
+    workbook = xlsxwriter.Workbook('Locations.xlsx')
+    locations = workbook.add_worksheet()
 
-	row = 0
+    row = 0
 
-	for location in data:
-		col = 0
-		for i in range(len(location)):
-			locations.write(row, col, location[col])
-			col += 1
-		row += 1
-		print("Created location " + str(row))
+    for location in data:
+        col = 0
+        for i in range(len(location)):
+            locations.write(row, col, location[col])
+            col += 1
+        row += 1
+        print("Created location " + str(row))
 
-	workbook.close()
+    workbook.close()
 
 
- # Execution
+# Execution
 
 if __name__ == '__main__':
-	print("Starting population script, This will take a few minutes...")
-	populateNew(100)
-	print("Population Script complete")
+    print("Starting population script, This will take a few minutes...")
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'codeforgood.settings')
+    PopulateDjang(100)
+    print("Population Script complete")
