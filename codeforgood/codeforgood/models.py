@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Users(models.Model):
     username = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
@@ -8,6 +9,7 @@ class Users(models.Model):
     address = models.CharField(max_length=255)
     phone = models.CharField(max_length=255)
     dob = models.DateTimeField()
+
 
 class Locations(models.Model):
     name = models.CharField(max_length=255)
@@ -21,33 +23,39 @@ class Locations(models.Model):
     cost = models.CharField(max_length=255)
     description = models.CharField(max_length=4095)
     tags = models.CharField(max_length=4095)
-    accessbility = models.CharField(max_length=4095)
+    accessibility = models.CharField(max_length=4095)
     date = models.DateField()
-    user_id = models.ForeignKey(Users, on_delete = models.SET_NULL, null = True, default = None)
+    user_id = models.ForeignKey(Users, on_delete=models.SET_NULL, blank=True, null=True, default=None)
 
     def __str__(self):
         return self.name
 
+
 class Favourites(models.Model):
-    user_id = models.ForeignKey(Users, on_delete = models.SET_NULL, null = True, default = None)
-    favourite_loc_id = models.ForeignKey(Locations, on_delete = models.SET_NULL, null = True, default = None)
+    user_id = models.ForeignKey(Users, on_delete=models.SET_NULL, null=True, default=None)
+    favourite_loc_id = models.ForeignKey(Locations, on_delete=models.SET_NULL, null=True, default=None)
+
 
 class Saved_Searches(models.Model):
-    user_id = models.ForeignKey(Users, on_delete = models.SET_NULL, null = True, default = None)
+    user_id = models.ForeignKey(Users, on_delete=models.SET_NULL, null=True, default=None)
     location = models.CharField(max_length=255)
     search = models.CharField(max_length=255)
+
+
 search_filters = models.CharField(max_length=255)
 
+
 class Suggestions(models.Model):
-    loc_id = models.ForeignKey(Locations, on_delete = models.SET_NULL, null = True, default = None)
-    user_id = models.ForeignKey(Users, on_delete = models.SET_NULL, null = True, default = None)
+    loc_id = models.ForeignKey(Locations, on_delete=models.SET_NULL, null=True, default=None)
+    user_id = models.ForeignKey(Users, on_delete=models.SET_NULL, null=True, default=None)
     suggestion = models.CharField(max_length=6000)
 
+
 class Warnings(models.Model):
-    loc_id = models.ForeignKey(Locations, on_delete = models.SET_NULL, null = True, default = None)
+    loc_id = models.ForeignKey(Locations, on_delete=models.SET_NULL, null=True, default=None)
     warning = models.CharField(max_length=255)
+
 
 class Categories(models.Model):
     category = models.CharField(max_length=255)
     subcategory = models.CharField(max_length=255)
-    
