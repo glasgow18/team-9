@@ -1,0 +1,6 @@
+*.none
+
+.idea/
+*.sql
+*.pyc
+*.sqlite3
