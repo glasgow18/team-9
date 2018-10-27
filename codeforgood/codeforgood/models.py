@@ -35,8 +35,8 @@ class Tags(models.Model):
 
 
 class Location_Tags(models.Model):
-    location = models.ForeignKey(Tags, on_delete=models.CASCADE)
-    tag = models.ForeignKey(Locations, on_delete=models.CASCADE)
+    location = models.ForeignKey(Locations, on_delete=models.CASCADE)
+    tag = models.ForeignKey(Tags, on_delete=models.CASCADE)
 
 
 class Favourites(models.Model):

@@ -35,7 +35,7 @@ data = (
 
 data = (
     ['St. James the lass church hall 1', 'St. James the lass church hall 2', 'St. James the lass church hall 3'],
-    ["55581", "55.873581", "55.873581"],
+    ["55.581", "55.873581", "55.873581"],
     ["-4.292699", "-4.292699", "-4.292699"],
     ["Penicuik"],
     ["Vestry Secretary"],
@@ -49,7 +49,7 @@ data = (
     ["1998-10-10"],
     [None])
 
-def PopulateDjang(n):
+def PopulateLoc(n):
     for row in range(n):
         entry = [""] * len(data)
         for i in range(len(data)):
@@ -61,6 +61,33 @@ def PopulateDjang(n):
                       date=entry[12], user_id=entry[13])
         print(p)
         p.save()
+
+
+tags = ["Sight", "Hearing", "Sound", "Music", "safe space", "flexible", "quiet", "solitary", "indoors", "parking", "wheelchair", "safe"]
+
+
+def PopulateTags(n):
+    Tags.objects.all().delete()
+    Location_Tags.objects.all().delete()
+
+    for i in range(len(tags)):
+        if i > 8:
+            t = Tags(tag=tags[i], accessibility=True)
+        else:
+            t = Tags(tag=tags[i], accessibility=False)
+        t.save()
+        print(t)
+
+    for loc in Locations.objects.all():
+        loctags = []
+        for i in range(random.randint(0,n)):
+            loctags.append(Tags.objects.all()[random.randint(0, len(Tags.objects.all())-1)])
+        for tag in loctags:
+            print(loc.id, tag.id)
+            tl = Location_Tags(location=loc, tag=tag)
+            tl.save()
+            print(tl)
+
 
 # def populateNew(n):
 #     workbook = xlsxwriter.Workbook('Locations.xlsx')
@@ -94,6 +121,6 @@ if __name__ == '__main__':
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'codeforgood.settings')
     import django
     django.setup()
-    from codeforgood.models import Locations
-    PopulateDjang(100)
+    from codeforgood.models import Locations, Tags, Location_Tags
+    PopulateTags(3)
     print("Population Script complete")
