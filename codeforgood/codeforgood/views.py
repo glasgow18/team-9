@@ -87,8 +87,6 @@ def search(request, input):
     else:
         return locations
 
-Location.objects.filter(latitude__gt == 0)
-
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'codeforgood.settings')
 import django
