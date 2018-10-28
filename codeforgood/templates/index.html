@@ -9,7 +9,7 @@
 
                 <div class="col-md-3 col-sm-6 mb-4">
                     <form action="search" method="get">
-                        <img class="card-img-top" src="{% static "sound.png" %}" alt="light">
+                        <img class="card-img-top" src="{% static 'sound.png' %}" alt="light">
                         <div class="card-body">
                             <input type="hidden" name="name" value="sound">
                             <input type="submit" value="#sound">
@@ -59,7 +59,6 @@
                         </div>
                     </form>
                 </div>
-
                 <!-- end of second row -->
             </div>
         </div>
@@ -72,7 +71,7 @@
             <a href="{% url 'logout' %}">Logout</a>
         {% else %}
             <a href="{% url 'login' %}">Login</a>
-            <a href="accounts/signup">Sign up</a>
+            <a href="accountssignup">Sign up</a>
         {% endif %}
     </div>
 
