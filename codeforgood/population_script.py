@@ -11,35 +11,11 @@ import os
 # [id, name, coords, location, contact name, contact num, contact email, website,
 # cost,	description, Tags(strings delim by ;),
 # Accessibility(strings delim by ;), picture, date, user_id
-data = (
-    [1, 'St. James the lass church hall 1', "55581, -4.292699",
-     "Penicuik", "Vestry Secretary", "01968768954", "phillg13@toucansurf.com",
-     "https://stjamesthelesspenicuik.org", "free",
-     "Hall for hire, welcome to use if available, contact us for more",
-     "Sight;Hearing;sound;music;safe space;flexible;quiet;solitary;indoors;",
-     "parking",
-     "Wheelchair friendly;Safe", None, "10/10/1998", None],
-
-    [2, 'St. James the lass church hall 2', "55.873581, -4.292699",
-     "Penicuik", "Vestry Secretary", "01968768954", "phillg13@toucansurf.com",
-     "https://stjamesthelesspenicuik.org", "free",
-     "Hall for hire, welcome to use if available, contact us for more",
-     "Sight;Hearing;sound;music;safe space;flexible;quiet;solitary;indoors",
-     "parking",
-     "Wheelchair friendly", None, "10/10/1998", None],
-    [3, 'St. James the lass church hall 3', "55.873581, -4.292699",
-     "Penicuik", "Vestry Secretary", "01968768954", "phillg13@toucansurf.com",
-     "https://stjamesthelesspenicuik.org", "£10 per hour",
-     "Hall for hire, welcome to use if available, contact us for more",
-     "Sight;Hearing;sound;music;safe space;flexible;quiet;solitary;indoors",
-     "parking",
-     "Wheelchair friendly", None, "10/10/1998", None]
-)
 
 data = (
     ['St. James', 'St. John', 'St. Jessica'],
-    ["55.581", "55.873581", "55.873581"],
-    ["-4.292699", "-4.292699", "-4.292699"],
+    ["55.581", "55.873581"],
+    ["-4.292699", "-4.292699"],
     ["Penicuik"],
     ["Vestry Secretary"],
     ["01968768954"],
@@ -58,7 +34,7 @@ def PopulateLoc(n):
         entry = [""] * len(data)
         for i in range(len(data)):
             entry[i] = data[i][random.randint(0, len(data[i]) - 1)]
-        p = Locations(name=entry[0], coords=entry[1], latitude=entry[2], longitude=entry[3], contact_name=entry[4],
+        p = Locations(name=entry[0], latitude=entry[1], longitude=entry[2], place=entry[3], contact_name=entry[4],
                       contact_num=entry[5],
                       contact_email=entry[6], website=entry[7], cost=entry[8], description=entry[9],
                       date=entry[12], user_id=entry[13])
@@ -66,7 +42,7 @@ def PopulateLoc(n):
         p.save()
 
 
-tags = ["Sight", "Hearing", "Sound", "Music", "safe space", "flexible", "quiet", "solitary", "indoors", "parking", "wheelchair", "safe"]
+tags = ["Sight", "Hearing", "Sound", "Noise", "Music", "safe space", "flexible", "quiet", "solitary", "indoors", "parking", "wheelchair", "safe"]
 
 
 def PopulateTags(n):
@@ -91,10 +67,10 @@ def PopulateTags(n):
             tl.save()
             print(tl)
 
-    for k in range(20):
-        user = User.objects.create_user("John"+str(k), "JohnPass"+str(k), "John@gmail.com")
-        user.last_name = "Smith"
-        user.save()
+    #for k in range(20):
+        #user = User.objects.create_user("John"+str(k), "JohnPass"+str(k), "John@gmail.com")
+        #user.last_name = "Smith"
+        #user.save()
 
 # def populateNew(n):
 #     workbook = xlsxwriter.Workbook('Locations.xlsx')

@@ -7,7 +7,6 @@ from urllib.request import urlopen
 #from django.shortcuts import render
 #from social.forms import RegistrationForm, UserProfileForm
 from django.shortcuts import render
-from codeforgood.models import Locations
 from django.http import HttpRequest
 from django.http import HttpResponse
 import datetime
@@ -62,33 +61,33 @@ def search(request):
     if (good_input[0] != ""):
         for input in good_input:
             for tag in tags:
-                if( input == tag):
+                if(input.lower() == tag.tag.lower()):
                     tags_list.append(tag)
         for tag in tags_list:
-            for tag_loc in  tags_location:
+            for tag_loc in tags_location:
                 if(tag == tag_loc.tag):
                     tags_final.append(tag_loc)
         for location in locations:
             islocation = False
             for input in good_input:
-                if(location.name.find(input) != -1):
+                if(location.name.lower().find(input.lower()) != -1):
                     results.append(location)
                     islocation = True
                     break
             if(not islocation):
                 valid = False
                 for tag in tags_final:
-                    if(tag.location == location.id):
+                    if(tag.location == location):
                         results.append(location)
                         valid = True
                         break
                 if(not valid):
                     for input in good_input:
-                        if(location.description.find(input) != -1):
+                        if(location.description.lower().find(input.lower()) != -1):
                             results.append(location)
                             break;
 
-        return render(request, "search.html", {"locations":results})
+        return render(request, "search.html", {"locations":results, "search":request.GET.get("name","")})
     else:
         return locations
 
@@ -97,3 +96,46 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'codeforgood.settings')
 import django
 django.setup()
 from codeforgood.models import Locations, Tags, Location_Tags
+
+
+def searchTest(string):
+    input = string
+    good_input = input.split()
+    tags = Tags.objects.all()
+    tags_location = Location_Tags.objects.all()               #
+    tags_list = []
+    tags_final = []
+    locations = Locations.objects.all()
+    results = []
+    if (good_input[0] != ""):
+        for input in good_input:
+            for tag in tags:
+                if(input.lower() == tag.tag.lower()):
+                    tags_list.append(tag)
+        for tag in tags_list:
+            for tag_loc in tags_location:
+                if(tag == tag_loc.tag):
+                    tags_final.append(tag_loc)
+        for location in locations:
+            islocation = False
+            for input in good_input:
+                if(location.name.lower().find(input.lower()) != -1):
+                    results.append(location)
+                    islocation = True
+                    break
+            if(not islocation):
+                valid = False
+                for tag in tags_final:
+                    if(tag.location == location):
+                        results.append(location)
+                        valid = True
+                        break
+                if(not valid):
+                    for input in good_input:
+                        if(location.description.lower().find(input.lower()) != -1):
+                            results.append(location)
+                            break;
+
+        return results
+    else:
+        return locations
