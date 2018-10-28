@@ -8,60 +8,63 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Shop Item - Start Bootstrap Template</title>
+    <title>Search | Artlink</title>
 
     <!-- Custom styles for this template -->
     <link href="stylesheets/shop-item.css" rel="stylesheet">
+    <link href="stylesheets/search_css.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="./stylesheets/stylesheet.css">
+    <link rel="stylesheet" href="./stylesheets/shop-item.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- Latest compiled and minified JavaScript -->
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script></head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
-<link rel="stylesheet" href="./stylesheets/stylesheet.css">
-<link rel="stylesheet" href="./stylesheets/shop-item.css">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <body>
-
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="#">Start Bootstrap</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-            </ul>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Start Bootstrap</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
 <div class="searchBoxArea">
     <!-- Search form -->
-    <form class="form-inline ">
-        <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search">
-        <i class="fa fa-search" aria-hidden="true"></i>
+    <form class="form-inline">
+        <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search" name="searchTextField">
+        <a class="btn btn-primary" href="#" role="button"><i class="fa fa-search" aria-hidden="true"></i></a>
     </form>
 </div>
 
-<div class="filters" style="width: 20%;">
+<div class="filters" style="width: 20%">
     <div class="filter distance">
-        <!--<label for="relativeDistance"><b>Distance:</b></label>-->
+        <label for="relativeDistance"><b>Distance:</b></label>
         <br>
         <select class="form-control">
             <option value="Exact Location">Exact Location</option>
@@ -73,7 +76,7 @@
             <option value="nationwide">Nationwide</option>
         </select>
     </div>
-    <div class="checkbox">
+    <div class="priceRange">
         <span><b>Price:</b></span><br>
         <div class="checkbox">
             <input type="checkbox" name="priceRange_free" value="free">Free<br>
@@ -84,11 +87,20 @@
     </div>
 </div>
 
-{% if locations %}
-{% for location in locations %}
-    <p>{{location.name}}</p>
-{% endfor %}
-{% endif %}
+    <div class="resultsAndGroup">
+        <div class="sortBy">
+            <!-- dropdown menu for sort by-->
+            <label for="sortBy"><b>Sort by:</b></label>
+            <select class="form-control" id="sortBy">
+                <option value="pricelowToHigh">Price (Low to High)</option>
+                <option value="priceHighToLow">Price (High to Low)</option>
+                <option value="newest">Newest</option>
+            </select>
+        </div>
+        <div class="results">
+            <p>this is where results from search would go</p>
+        </div>
+    </div>
 
 <footer class="py-5 bg-dark">
     <div class="container">
@@ -97,7 +109,11 @@
     <!-- /.container -->
 </footer>
 
-
+{% if locations %}
+    {% for location in locations %}
+        <p>{{location.name}}</p>
+    {% endfor %}
+{% endif %}
 
 </body>
 
