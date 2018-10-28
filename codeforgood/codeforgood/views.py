@@ -6,7 +6,10 @@ from urllib.request import urlopen
 #from django.core.urlresolvers import reverse
 #from django.shortcuts import render
 #from social.forms import RegistrationForm, UserProfileForm
-
+from django.shortcuts import render
+from codeforgood.models import Locations
+from django.http import HttpResponse
+import datetime
 #from django.core.urlresolvers import reverse
 #from django.contrib.auth.decorators import login_required
 #from django.contrib.auth import logout
@@ -43,8 +46,8 @@ def calculateDistance():
     print("Result:", distance)
 
 
-calculateDistance()
-
+def index(request):
+    return render(request, 'index.html')
 
 def search(request, input):
     good_input = input.split()
@@ -92,4 +95,3 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'codeforgood.settings')
 import django
 django.setup()
 from codeforgood.models import Locations, Tags, Location_Tags
-search("GET","John")
