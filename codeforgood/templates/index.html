@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container con">
+<br><br><br><br>
+    <div class="container con">
 
     <div class="col-xl-12 content-box ">
         <div class="row row-featured row-featured-category">
 
             <div class="col-xl-2 col-md-3 col-sm-3 col-xs-4 f-category">
-                <a href="category.html"><img src="images/category/car-2.jpg" class="img-responsive" alt="img">
+                <form method="get" action="search">
+                <input type="hidden" name="name" value="noise">
+                <input type="submit" value="noise">
                     <h6> Category </h6></a>
+                </form>
             </div>
 
             <div class="col-xl-2 col-md-3 col-sm-3 col-xs-4 f-category">

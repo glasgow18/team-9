@@ -88,7 +88,7 @@ def search(request):
                             results.append(location)
                             break;
 
-        print(results)
+        return render(request, "search.html", {"locations":results})
     else:
         return locations
 
