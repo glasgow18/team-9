@@ -4,6 +4,9 @@
 import random
 import os
 
+# Django built in basic user model
+#from django.contrib.auth.models import User
+
 # format of the Location lists
 # [id, name, coords, location, contact name, contact num, contact email, website,
 # cost,	description, Tags(strings delim by ;),
@@ -88,6 +91,10 @@ def PopulateTags(n):
             tl.save()
             print(tl)
 
+    for k in range(20):
+        user = User.objects.create_user("John"+str(k), "JohnPass"+str(k), "John@gmail.com")
+        user.last_name = "Smith"
+        user.save()
 
 # def populateNew(n):
 #     workbook = xlsxwriter.Workbook('Locations.xlsx')
@@ -122,6 +129,7 @@ if __name__ == '__main__':
     import django
     django.setup()
     from codeforgood.models import Locations, Tags, Location_Tags
+    from django.contrib.auth.models import User
     PopulateLoc(100)
     PopulateTags(3)
 
