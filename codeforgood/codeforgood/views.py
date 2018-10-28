@@ -6,6 +6,11 @@ from urllib.request import urlopen
 #from django.core.urlresolvers import reverse
 #from django.shortcuts import render
 #from social.forms import RegistrationForm, UserProfileForm
+import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'codeforgood.settings')
+import django
+django.setup()
+from codeforgood.models import Locations, Tags, Location_Tags
 from django.shortcuts import render
 from django.http import HttpRequest
 from django.http import HttpResponse
@@ -91,51 +96,19 @@ def search(request):
     else:
         return locations
 
-import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'codeforgood.settings')
-import django
-django.setup()
-from codeforgood.models import Locations, Tags, Location_Tags
+def list_loc_by_distance():
+    distances = []
+    array = []
+    #locations = search()
+    for location in locations:
+        distances.append(calculateDistance(location.latitude,location.longitude))
+    for x in range(0,len(distances)):
+        if(distances[x] > 20):
+            distances.remove(x)
+            locations.remove(x)
+            --x
+    for y in range(len(distances)):
+        array.append([locations[y]],[distances[y]])
 
 
-def searchTest(string):
-    input = string
-    good_input = input.split()
-    tags = Tags.objects.all()
-    tags_location = Location_Tags.objects.all()               #
-    tags_list = []
-    tags_final = []
-    locations = Locations.objects.all()
-    results = []
-    if (good_input[0] != ""):
-        for input in good_input:
-            for tag in tags:
-                if(input.lower() == tag.tag.lower()):
-                    tags_list.append(tag)
-        for tag in tags_list:
-            for tag_loc in tags_location:
-                if(tag == tag_loc.tag):
-                    tags_final.append(tag_loc)
-        for location in locations:
-            islocation = False
-            for input in good_input:
-                if(location.name.lower().find(input.lower()) != -1):
-                    results.append(location)
-                    islocation = True
-                    break
-            if(not islocation):
-                valid = False
-                for tag in tags_final:
-                    if(tag.location == location):
-                        results.append(location)
-                        valid = True
-                        break
-                if(not valid):
-                    for input in good_input:
-                        if(location.description.lower().find(input.lower()) != -1):
-                            results.append(location)
-                            break;
 
-        return results
-    else:
-        return locations
