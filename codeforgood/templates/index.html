@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
+
     <br><br><br><br>
     <div class="container">
         <div class="col-xl-8 content-box">
@@ -7,7 +9,7 @@
 
                 <div class="col-md-3 col-sm-6 mb-4">
                     <form action="search" method="get">
-                        <img class="card-img-top" src="http://placehold.it/150x150" alt="Card image cap">
+                        <img class="card-img-top" src="{% static "sound.png" %}" alt="light">
                         <div class="card-body">
                             <input type="hidden" name="name" value="sound">
                             <input type="submit" value="#sound">
@@ -18,7 +20,7 @@
 
                 <div class="col-md-3 col-sm-6 mb-4">
                     <form action="search" method="get">
-                        <img class="card-img-top" src="http://placehold.it/150x150" alt="Card image cap">
+                        <img class="card-img-top" src="{% static 'outside.jpeg' %}" alt="Outdoors">
                         <div class="card-body">
                             <input type="hidden" name="name" value="outdoors">
                             <input type="submit" value="#outdoors">
@@ -28,9 +30,9 @@
 
                 <div class="col-md-3 col-sm-6 mb-4">
                     <form action="search" method="get">
-                        <img class="card-img-top" src="http://placehold.it/150x150" alt="Card image cap">
+                        <img class="card-img-top" src="{% static 'light.jpeg' %}" alt="Light">
                         <div class="card-body">
-                            <input type="hidden" name="name" value="noise">
+                            <input type="hidden" name="name" value="light">
                             <input type="submit" value="#noise">
                         </div>
                     </form>
@@ -39,9 +41,9 @@
 
                 <div class="col-md-3 col-sm-6 mb-4">
                     <form action="search" method="get">
-                        <img class="card-img-top" src="http://placehold.it/150x150" alt="Card image cap">
+                        <img class="card-img-top" src="{% static 'quiet.jpeg' %}" alt="Quiet">
                         <div class="card-body">
-                            <input type="hidden" name="name" value="light">
+                            <input type="hidden" name="name" value="quiet">
                             <input type="submit" value="#light">
                         </div>
                     </form>
@@ -50,20 +52,10 @@
 
                 <div class="col-md-3 col-sm-6 mb-4">
                     <form action="search" method="get">
-                        <img class="card-img-top" src="http://placehold.it/150x150" alt="Card image cap">
+                        <img class="card-img-top" src="{% static 'touch.jpeg' %}" alt="Touch">
                         <div class="card-body">
-                            <input type="hidden" name="name" value="light">
+                            <input type="hidden" name="name" value="touch">
                             <input type="submit" value="#light">
-                        </div>
-                    </form>
-                </div>
-
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <form action="search" method="get">
-                        <img class="card-img-top" src="http://placehold.it/150x150" alt="Card image cap">
-                        <div class="card-body">
-                            <input type="hidden" name="name" value="visual">
-                            <input type="submit" value="#visual">
                         </div>
                     </form>
                 </div>
