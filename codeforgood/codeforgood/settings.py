@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'codeforgood',
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -117,3 +118,4 @@ STATIC_URL = '/static/'
 
 # Registration
 LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
