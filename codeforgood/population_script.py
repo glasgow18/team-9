@@ -1,6 +1,6 @@
 # imports
 
-import xlsxwriter
+#import xlsxwriter
 import random
 import os
 
@@ -34,7 +34,7 @@ data = (
 )
 
 data = (
-    ['St. James the lass church hall 1', 'St. James the lass church hall 2', 'St. James the lass church hall 3'],
+    ['St. James', 'St. John', 'St. Jessica'],
     ["55.581", "55.873581", "55.873581"],
     ["-4.292699", "-4.292699", "-4.292699"],
     ["Penicuik"],
@@ -50,14 +50,14 @@ data = (
     [None])
 
 def PopulateLoc(n):
+    Locations.objects.all().delete()
     for row in range(n):
         entry = [""] * len(data)
         for i in range(len(data)):
             entry[i] = data[i][random.randint(0, len(data[i]) - 1)]
         p = Locations(name=entry[0], coords=entry[1], latitude=entry[2], longitude=entry[3], contact_name=entry[4],
                       contact_num=entry[5],
-                      contact_email=entry[6], website=entry[7], cost=entry[8], description=entry[9], tags=entry[10],
-                      accessibility=entry[11],
+                      contact_email=entry[6], website=entry[7], cost=entry[8], description=entry[9],
                       date=entry[12], user_id=entry[13])
         print(p)
         p.save()
@@ -122,9 +122,7 @@ if __name__ == '__main__':
     import django
     django.setup()
     from codeforgood.models import Locations, Tags, Location_Tags
-    #PopulateTags(3)
-
-    print(Locations.objects.filter(id__lt=5))
-
+    PopulateLoc(100)
+    PopulateTags(3)
 
     print("Population Script complete")
