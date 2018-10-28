@@ -142,6 +142,3 @@ def user(request):
 	favourites = Favourites.objects.filter(id=uid)
 	favs = [Locations(id=i) for i in favourites]
 	return render(request, "user.html", {"user":User(id=uid), "favs": favs})
-
-
-print(search_func('sound'))
