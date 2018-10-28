@@ -9,7 +9,7 @@
     <meta name="author" content="">
 
     <title>Shop Item - Start Bootstrap Template</title>
-    
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="../../stylesheets/stylesheet.css">
     <link rel="stylesheet" href="../../stylesheets/shop-item.css">
@@ -41,7 +41,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                <div class="nav-link">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}">Logout</a>
+                    {% else %}
+                        <a href="{% url 'login' %}">Login</a>
+                        <a href="signup">Sign up</a>
+                    {% endif %}
+                </div>
                 </li>
             </ul>
         </div>
