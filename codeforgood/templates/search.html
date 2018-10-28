@@ -1,6 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<script>
+    function expand(id) {
+    var para = document.getElementById("paragraphDescription"+String(id));
+    var expandButton = document.getElementById("ExpandButton"+String(id));
+
+    if (para.style.display == 'none') {
+        para.style.display = 'block';
+        expandButton.innerText = "Hide";
+    } else {
+        para.style.display = 'none';
+        expandButton.innerText = "Expand";
+    }
+    }
+</script>
+
 <div class="searchBoxArea">
     <!-- Search form -->
     <form class="form-inline" method="get" action="#">
@@ -57,22 +72,23 @@
     </div>
     <div class="col">
         {% if locations %}
+        <ul>
             {% for location in locations %}
+            <li>
                 <div class="card h-100">
-                    <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q={{location.latitude}}%2C%20{{location.longitude}}&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.pureblack.de">website erstellen lassen</a></div><style>.mapouter{text-align:right;height:500px;width:600px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div>
-                    <a href="#"><img class="card-img-top" alt=""></a>
+                    <div class="card-img-top"><div class="gmap_canvas"><iframe width="100%" height="100%" id="gmap_canvas" src="https://maps.google.com/maps?q={{location.latitude}}%2C%20{{location.longitude}}&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.pureblack.de">website erstellen lassen</a></div><style>.mapouter{text-align:right;height:500px;width:600px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div>
                     <div class="card-body">
                         <h4 class="card-title">
                             <a href="#">{{location.name}}</a>
                         </h4>
                         <h5>{{location.place}}</h5>
-                        <p class="card-text">{{location.description}}</p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                        <p id="paragraphDescription{{location.id}}" style = "display:none;">{{location.description}}</p>
+                        <button onclick="expand({{location.id}})", id="ExpandButton{{location.id}}">Expand</button>
                     </div>
                 </div>
+            </li>
             {% endfor %}
+        </ul>
         {% endif %}
         </div>
     </div>
