@@ -72,14 +72,14 @@
     </div>
     <div class="col">
         {% if locations %}
-        <ul>
+        <ul style="list-style: none;">
             {% for location in locations %}
             <li>
                 <div class="card h-100">
                     <div class="card-img-top"><div class="gmap_canvas"><iframe width="100%" height="100%" id="gmap_canvas" src="https://maps.google.com/maps?q={{location.latitude}}%2C%20{{location.longitude}}&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.pureblack.de">website erstellen lassen</a></div><style>.mapouter{text-align:right;height:500px;width:600px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#">{{location.name}}</a>
+                            <a href="{{location.website}}">{{location.name}}</a>
                         </h4>
                         <h5>{{location.place}}</h5>
                         <p id="paragraphDescription{{location.id}}" style = "display:none;">{{location.description}}</p>
