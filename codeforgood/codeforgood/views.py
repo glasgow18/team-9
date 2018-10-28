@@ -10,7 +10,8 @@ import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'codeforgood.settings')
 import django
 django.setup()
-from codeforgood.models import Locations, Tags, Location_Tags, Categories
+from codeforgood.models import Locations, Tags, Location_Tags, Categories, Favourites
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.http import HttpRequest
 from django.http import HttpResponse
@@ -131,11 +132,9 @@ def addLocation(request):
     location = Locations.objects.get_or_create(loc_name,lan,lon,loc_place,contact_name,contact_num,contact_email,website,cost,loc_description,loc_date,user)[0]
     location.save()
 
-
-
-
-
-
-
-
-
+def user(request):
+	uid = request.GET.get('user_id')
+	 # list of ids of locations
+	favourites = Favourites.objects.filter(id=uid)
+	favs = [Locations(id=i) for i in favourites]
+	return render(request, "user.html", {"user":User(id=uid), "favs": favs})
