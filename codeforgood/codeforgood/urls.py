@@ -24,6 +24,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')), #login/out
     path('', views.index, name="index"),
+    path('add_location', views.add_location, name="add_location"),
     path('search', views.search, name='search'),
 ]
 

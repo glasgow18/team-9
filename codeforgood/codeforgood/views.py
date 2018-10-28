@@ -53,6 +53,9 @@ def calculateDistance():
 def index(request):
     return render(request, 'index.html')
 
+def add_location(request):
+    return render(request, 'add_location.html')
+
 def search(request):
     input = request.GET.get('name','')
     good_input = input.split()
