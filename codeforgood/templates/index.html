@@ -44,7 +44,7 @@
                         <img class="card-img-top" src="{% static 'quiet.jpeg' %}" alt="Quiet">
                         <div class="card-body">
                             <input type="hidden" name="name" value="quiet">
-                            <input type="submit" value="#light">
+                            <input type="submit" value="#quiet">
                         </div>
                     </form>
                 </div>
@@ -65,15 +65,6 @@
 
     </div>
 
-    <!-- cannot display for whatever reason, pls fix :( -->
-    <div>
-        {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}">Logout</a>
-        {% else %}
-            <a href="{% url 'login' %}">Login</a>
-            <a href="accountssignup">Sign up</a>
-        {% endif %}
-    </div>
 
 
 {% endblock %}
