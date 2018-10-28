@@ -1,7 +1,7 @@
 import json
 from urllib.request import urlopen
 #from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
-from codeforgood.codeforgood.models import Users, Locations, Tags, Location_Tags, Favourites, Saved_Searches
+#from codeforgood.models import Users, Locations, Tags, Location_Tags, Favourites, Saved_Searches
 #from django.contrib.auth import authenticate, login
 #from django.core.urlresolvers import reverse
 #from django.shortcuts import render
@@ -23,9 +23,7 @@ def getLocation():
     url = 'http://ipinfo.io?token=b4c8c534242400'
     response =urlopen(url)
     data = json.load(response)
-
     loc = data['loc']
-
     return loc
 
 def calculateDistance():
@@ -50,11 +48,11 @@ calculateDistance()
 
 def search(request, input):
     good_input = input.split()
-    tags = Tags.objects.all
-    tags_location = Location_Tags.objects.all               #
+    tags = Tags.objects.all()
+    tags_location = Location_Tags.objects.all()               #
     tags_list = []
     tags_final = []
-    locations = Locations.objects.all
+    locations = Locations.objects.all()
     results = []
     if (good_input[0] != ""):
         for input in good_input:
@@ -81,14 +79,19 @@ def search(request, input):
                         break
                 if(not valid):
                     for input in good_input:
-                        if(location.description.find(input)):
+                        if(location.description.find(input) != -1):
                             results.append(location)
                             break;
 
-
+        print(results)
     else:
         return locations
 
+Location.objects.filter(latitude__gt == 0)
 
-
-searchQuery("GET","sound")
+import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'codeforgood.settings')
+import django
+django.setup()
+from codeforgood.models import Locations, Tags, Location_Tags
+search("GET","John")

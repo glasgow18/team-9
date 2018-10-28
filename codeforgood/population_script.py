@@ -34,7 +34,7 @@ data = (
 )
 
 data = (
-    ['St. James the lass church hall 1', 'St. James the lass church hall 2', 'St. James the lass church hall 3'],
+    ['St. James', 'St. John', 'St. Jessica'],
     ["55.581", "55.873581", "55.873581"],
     ["-4.292699", "-4.292699", "-4.292699"],
     ["Penicuik"],
@@ -50,6 +50,7 @@ data = (
     [None])
 
 def PopulateLoc(n):
+    Locations.objects.all().delete()
     for row in range(n):
         entry = [""] * len(data)
         for i in range(len(data)):
