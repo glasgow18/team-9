@@ -98,9 +98,16 @@
             </select>
         </div>
         <div class="results">
+            <p>Blah results found for: {{search}}</p>
             <p>this is where results from search would go</p>
+            {% if locations %}
+                {% for location in locations %}
+                    <p>{{location.name}}</p>
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
+
 
 <footer class="py-5 bg-dark">
     <div class="container">
@@ -108,12 +115,6 @@
     </div>
     <!-- /.container -->
 </footer>
-
-{% if locations %}
-    {% for location in locations %}
-        <p>{{location.name}}</p>
-    {% endfor %}
-{% endif %}
 
 </body>
 

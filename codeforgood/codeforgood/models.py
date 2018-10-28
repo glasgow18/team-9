@@ -14,9 +14,9 @@ from django.contrib.auth.models import User
 
 class Locations(models.Model):
     name = models.CharField(max_length=255)
-    coords = models.CharField(max_length=255)
     latitude = models.CharField(max_length=255)
     longitude = models.CharField(max_length=255)
+    place = models.CharField(max_length=255)
     contact_name = models.CharField(max_length=255)
     contact_num = models.CharField(max_length=255)
     contact_email = models.CharField(max_length=255)
