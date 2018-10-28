@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <br><br><br><br>
-    <div class="container con">
+    <div class="container">
 
     <div class="col-xl-12 content-box ">
         <div class="row row-featured row-featured-category">
@@ -10,72 +10,48 @@
                 <form method="get" action="search">
                 <input type="hidden" name="name" value="noise">
                 <input type="submit" value="noise">
+                </form>
+            </div>
+
+
+            <div class="card" style="width: 13rem;">
+                <img class="card-img-top" src="http://placehold.it/150x150" alt="Card image cap">
+                <div class="card-body">
+                    <input type="hidden" name="name" value="noise">
+                    <input type="submit" value="noise">
+                </div>
+            </div>
+
+            <div class="col-xl-2 col-md-3 col-sm-3 col-xs-4 f-category">
+                <form method="get" action="search">
+                    <input type="hidden" name="name" value="noise">
+                    <input type="submit" value="noise">
                     <h6> Category </h6></a>
                 </form>
             </div>
 
             <div class="col-xl-2 col-md-3 col-sm-3 col-xs-4 f-category">
-                <a href="search.html/"><img src="images/category/laptop-2.jpg" class="img-responsive"
-                                             alt="img"> <h6> Category </h6></a>
-            </div>
-
-            <div class="col-xl-2 col-md-3 col-sm-3 col-xs-4 f-category">
-                <a href="{% url 'search' %}"><img src="images/category/mobile.jpg" class="img-responsive" alt="img">
+                <form method="get" action="search">
+                    <input type="hidden" name="name" value="noise">
+                    <input type="submit" value="noise">
                     <h6> Category </h6></a>
+                </form>
             </div>
 
-            <div class="col-xl-2 col-md-3 col-sm-3 col-xs-4 f-category">
-                <a href="category.html"><img src="images/category/tv.jpg" class="img-responsive" alt="img"> <h6>
-                    Category </h6></a>
-            </div>
 
             <div class="col-xl-2 col-md-3 col-sm-3 col-xs-4 f-category">
-                <a href="category.html"><img src="images/category/hdd.jpg" class="img-responsive" alt="img">
+                <form method="get" action="search">
+                    <input type="hidden" name="name" value="noise">
+                    <input type="submit" value="noise">
                     <h6> Category </h6></a>
+                </form>
             </div>
 
-            <div class="col-xl-2 col-md-3 col-sm-3 col-xs-4 f-category">
-                <a href="property-list.html"><img src="images/category/house.jpg" class="img-responsive"
-                                                  alt="img">
-                    <h6> Category </h6></a>
-            </div>
 
-            <div class="col-xl-2 col-md-3 col-sm-3 col-xs-4 f-category">
-                <a href="category.html"><img src="images/category/Home-Electronics-Appliances-2.jpg"
-                                             class="img-responsive" alt="img"> <h6> Category </h6></a>
-            </div>
-
-            <div class="col-xl-2 col-md-3 col-sm-3 col-xs-4 f-category">
-                <a href="category.html"><img src="images/category/camera.jpg" class="img-responsive" alt="img">
-                    <h6> Category </h6></a>
-            </div>
-
-            <div class="col-xl-2 col-md-3 col-sm-3 col-xs-4 f-category">
-                <a href="category.html"><img src="images/category/fashion.jpg" class="img-responsive" alt="img">
-                    <h6> Category </h6></a>
-            </div>
-
-            <div class="col-xl-2 col-md-3 col-sm-3 col-xs-4 f-category">
-                <a href="category.html"><img src="images/category/toy.jpg" class="img-responsive" alt="img">
-                    <h6> Category  </h6></a>
-            </div>
-
-            <div class="col-xl-2 col-md-3 col-sm-3 col-xs-4 f-category">
-                <a href="category.html"><img src="images/category/jobs.jpg" class="img-responsive" alt="img">
-                    <h6> Category </h6></a>
-            </div>
-
-            <div class="col-xl-2 col-md-3 col-sm-3 col-xs-4 f-category">
-                <a href="{% url 'search'%}"><img src="images/category/catalog.jpg" class="img-responsive" alt="img">
-                    <h6> Category </h6></a>
-            </div>
 
         </div>
     </div>
 </div>
 
-<!-- Search form -->
-<div class="md-form mt-0">
-    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-</div>
+
 {% endblock %}
