@@ -3,9 +3,10 @@
 
 <div class="searchBoxArea">
     <!-- Search form -->
-    <form class="form-inline">
-        <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search" name="searchTextField">
-        <a class="btn btn-primary" href="#" role="button"><i class="fa fa-search" aria-hidden="true"></i></a>
+    <form class="form-inline" method="get" action="#">
+        <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search" name="query">
+        <!-- <a class="btn btn-primary" href="" role="button"><i class="fa fa-search" aria-hidden="true"></i></a> -->
+        <input type="submit">
     </form>
 </div>
 
@@ -55,7 +56,6 @@
         </div>
     </div>
     <div class="col">
-        <div class="row-lg-16 row-md-3 row-mb-2">
         {% if locations %}
             {% for location in locations %}
                 <div class="card h-100">
@@ -73,7 +73,6 @@
                 </div>
             {% endfor %}
         {% endif %}
-        </div>
     </div>
 </div>
 

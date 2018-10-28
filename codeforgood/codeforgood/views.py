@@ -72,7 +72,7 @@ def list_loc_by_distance(list_loc):
 
 
 def search(request):
-    input = request.GET.get('name','')
+    input = request.GET.get('query','')
     return render(request, "search.html", {"locations":search_func(input), "search":request.GET.get("name","")})
 
 def search_func(input):
@@ -83,6 +83,8 @@ def search_func(input):
     tags_final = []
     locations = Locations.objects.all()
     results = []
+    if not good_input:
+        return locations
     if (good_input[0] != ""):
         for input in good_input:
             for tag in tags:
