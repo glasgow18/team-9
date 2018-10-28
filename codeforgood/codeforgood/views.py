@@ -57,49 +57,6 @@ def index(request):
 def add_location(request):
     return render(request, 'add_location.html')
 
-def search(request):
-    input = request.GET.get('name','')
-    good_input = input.split()
-    categories = Categories.objects.all()
-    tags_location = Location_Tags.objects.all()               #
-    tags_list = []
-    tags_final = []
-    locations = Locations.objects.all()
-    results = []
-    if (good_input[0] != ""):
-        for input in good_input:
-            tags_list.append(input.lower())
-            for tag in categories:
-                if(input.lower() == tag.subcategory.lower()):
-                    tags_list.append(tag.category.lower())
-        for tag in tags_list:
-            for tag_loc in tags_location:
-                if(tag == tag_loc.tag.lower()):
-                    tags_final.append(tag_loc.lower())
-        for location in locations:
-            islocation = False
-            for input in good_input:
-                if(location.name.lower().find(input.lower()) != -1):
-                    results.append(location)
-                    islocation = True
-                    break
-            if(not islocation):
-                valid = False
-                for tag in tags_final:
-                    if(tag.location == location):
-                        results.append(location)
-                        valid = True
-                        break
-                if(not valid):
-                    for input in good_input:
-                        if(location.description.lower().find(input.lower()) != -1):
-                            results.append(location)
-                            break;
-        list_of_locations = list_loc_by_distance(results)
-        return render(request, "search.html", {"locations":list_of_locations, "search":request.GET.get("name","")})
-    else:
-        return redirect("index")
-
 def list_loc_by_distance(list_loc):
     distances = []
     array1= list_loc[:]
@@ -111,6 +68,53 @@ def list_loc_by_distance(list_loc):
             array1.pop(x)
             x -=1
     return array1
+
+
+
+def search(request):
+    input = request.GET.get('name','')
+    return render(request, "search.html", {"locations":search_func(input), "search":request.GET.get("name","")})
+
+def search_func(input):
+    good_input = input.split()
+    tags = Tags.objects.all()
+    tags_location = Location_Tags.objects.all()  #
+    tags_list = []
+    tags_final = []
+    locations = Locations.objects.all()
+    results = []
+    if (good_input[0] != ""):
+        for input in good_input:
+            for tag in tags:
+                if (input.lower() == tag.tag.lower()):
+                    tags_list.append(tag)
+        for tag in tags_list:
+            for tag_loc in tags_location:
+                if (tag.tag.lower() == tag_loc.tag.tag.lower()):
+                    tags_final.append(tag_loc)
+        for location in locations:
+            islocation = False
+            for input in good_input:
+                if (location.name.lower().find(input.lower()) != -1):
+                    results.append(location)
+                    islocation = True
+                    break
+            if (not islocation):
+                valid = False
+                for tag in tags_final:
+                    if (tag.location == location):
+                        results.append(location)
+                        valid = True
+                        break
+                if (not valid):
+                    for input in good_input:
+                        if (location.description.lower().find(input.lower()) != -1):
+                            results.append(location)
+                            break;
+        list_of_locations = results
+        return list_of_locations
+    else:
+        return locations
 
 
 def addLocation(request):
@@ -138,3 +142,6 @@ def user(request):
 	favourites = Favourites.objects.filter(id=uid)
 	favs = [Locations(id=i) for i in favourites]
 	return render(request, "user.html", {"user":User(id=uid), "favs": favs})
+
+
+print(search_func('sound'))

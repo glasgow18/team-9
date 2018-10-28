@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="row">
-<div class="col-sm-4">
-
 <div class="searchBoxArea">
     <!-- Search form -->
     <form class="form-inline">
@@ -12,67 +9,73 @@
     </form>
 </div>
 
-<div class="filters" style="width: 20%">
-    <div class="filter distance">
-        <label for="relativeDistance"><b>Distance:</b></label>
-        <br>
-        <select class="form-control">
-            <option value="Exact Location">Exact Location</option>
-            <option value="3miles">+ 3 miles</option>
-            <option value="5miles">+ 5 miles</option>
-            <option value="10miles">+ 10 miles</option>
-            <option value="25miles">+ 25 miles</option>
-            <option value="50miles">+ 50 miles</option>
-            <option value="nationwide">Nationwide</option>
-        </select>
-    </div>
-    <div class="priceRange">
-        <span><b>Price:</b></span><br>
-        <div class="checkbox">
-            <input type="checkbox" name="priceRange_free" value="free">Free<br>
-            <input type="checkbox" name="priceRange_upto10" value="one_to_ten">£1 - £10<br>
-            <input type="checkbox" name="priceRange_upto25" value="ten_twentyfive">£10 - £25<br>
-            <input type="checkbox" name="priceRange_over25" value="over_twentyfive">over £25<br>
-        </div>
-    </div>
-</div>
+<div class="row">
+    <div class="col-sm-2">
 
-    <div class="resultsAndGroup">
-        <div class="sortBy">
-            <!-- dropdown menu for sort by-->
-            <label for="sortBy"><b>Sort by:</b></label>
-            <select class="form-control" id="sortBy">
-                <option value="pricelowToHigh">Price (Low to High)</option>
-                <option value="priceHighToLow">Price (High to Low)</option>
-                <option value="newest">Newest</option>
+    <div class="filters" style="width: 100%">
+        <div class="filter distance">
+            <label for="relativeDistance"><b>Distance:</b></label>
+            <br>
+            <select class="form-control">
+                <option value="Exact Location">Exact Location</option>
+                <option value="3miles">+ 3 miles</option>
+                <option value="5miles">+ 5 miles</option>
+                <option value="10miles">+ 10 miles</option>
+                <option value="25miles">+ 25 miles</option>
+                <option value="50miles">+ 50 miles</option>
+                <option value="nationwide">Nationwide</option>
             </select>
         </div>
-        <div class="results">
-            <p>Blah results found for: {{search}}</p>
-            <p>this is where results from search would go</p>
-            {% if locations %}
-                {% for location in locations %}
-                    <p>{{location.name}}</p>
-                {% endfor %}
-            {% endif %}
+        <div class="priceRange">
+            <span><b>Price:</b></span><br>
+            <div class="checkbox">
+                <input type="checkbox" name="priceRange_free" value="free">Free<br>
+                <input type="checkbox" name="priceRange_upto10" value="one_to_ten">£1 - £10<br>
+                <input type="checkbox" name="priceRange_upto25" value="ten_twentyfive">£10 - £25<br>
+                <input type="checkbox" name="priceRange_over25" value="over_twentyfive">over £25<br>
+            </div>
         </div>
     </div>
-</div>
-    <div class="row">
-        <div class="col-lg-10 col-md-6 mb-4">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">Item One</a>
-                    </h4>
-                    <h5>#Noise</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                </div>
+
+        <div class="resultsAndGroup">
+            <div class="sortBy">
+                <!-- dropdown menu for sort by-->
+                <label for="sortBy"><b>Sort by:</b></label>
+                <select class="form-control" id="sortBy">
+                    <option value="pricelowToHigh">Price (Low to High)</option>
+                    <option value="priceHighToLow">Price (High to Low)</option>
+                    <option value="newest">Newest</option>
+                </select>
             </div>
+            <div class="results">
+                {% if locations %}
+                <p>{{locations|length}} results found for: {{search}}</p>
+                    {% for location in locations %}
+                        <p>{{location.name}}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="row-lg-16 row-md-3 row-mb-2">
+        {% if locations %}
+            {% for location in locations %}
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#">Item One</a>
+                        </h4>
+                        <h5></h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
         </div>
     </div>
 </div>
