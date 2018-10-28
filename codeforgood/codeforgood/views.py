@@ -67,14 +67,14 @@ def search(request):
     results = []
     if (good_input[0] != ""):
         for input in good_input:
-            tags_list.append(input)
+            tags_list.append(input.lower())
             for tag in categories:
                 if(input.lower() == tag.subcategory.lower()):
-                    tags_list.append(tag.category)
+                    tags_list.append(tag.category.lower())
         for tag in tags_list:
             for tag_loc in tags_location:
-                if(tag == tag_loc.tag):
-                    tags_final.append(tag_loc)
+                if(tag == tag_loc.tag.lower()):
+                    tags_final.append(tag_loc.lower())
         for location in locations:
             islocation = False
             for input in good_input:
