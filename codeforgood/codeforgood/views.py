@@ -12,7 +12,7 @@ import django
 django.setup()
 from codeforgood.models import Locations, Tags, Location_Tags, Categories, Favourites
 from django.contrib.auth.models import User
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.http import HttpResponse
 import datetime
@@ -98,7 +98,7 @@ def search(request):
         list_of_locations = list_loc_by_distance(results)
         return render(request, "search.html", {"locations":list_of_locations, "search":request.GET.get("name","")})
     else:
-        return locations
+        return redirect("index")
 
 def list_loc_by_distance(list_loc):
     distances = []
