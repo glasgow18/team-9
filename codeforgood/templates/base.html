@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
 
 <head>
@@ -11,12 +13,11 @@
     <title>Shop Item - Start Bootstrap Template</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../stylesheets/stylesheet.css">
-    <link rel="stylesheet" href="../../stylesheets/shop-item.css">
-    <link rel="stylesheet" href="../../stylesheets/add_location_css.css">
+    <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shop-item.css' %}">
+    <link rel="stylesheet" href="{% static 'css/add_location_css.css' %}">
 
     <!-- Custom styles for this template -->
-    <link href="../../stylesheets/shop-item.css" rel="stylesheet">
     <!-- Latest compiled and minified JavaScript -->
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
