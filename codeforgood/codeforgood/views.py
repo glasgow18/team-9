@@ -37,7 +37,6 @@ def getLocation():
 def calculateDistance():
     location = getLocation().split(',')
     R = 6373.0
-
     lat1 = radians(float(location[0]))
     lon1 = radians(float(location[1]))
     lat2 = radians(56)
@@ -48,7 +47,7 @@ def calculateDistance():
     c = 2 * atan2(sqrt(a), sqrt(1 - a))
     distance = R * c
 
-    print("Result:", distance)
+    return distance
 
 
 def index(request):
@@ -109,6 +108,32 @@ def list_loc_by_distance():
             --x
     for y in range(len(distances)):
         array.append([locations[y]],[distances[y]])
+
+
+def addLocation(request):
+
+    loc_name = request.GET.get('name')
+    loc_place = request.GET.get('place')
+    loc_description = request.GET.get('description')
+    if(loc_name && loc_place && loc_description ):
+        return django.http.HttpResponseBadRequest()
+    loc_date = request.GET.get('date', "")
+    lan = request.GET.get('name',"")
+    lon= request.GET.get('name',"")
+    contact_name= request.GET.get('name',"")
+    contact_num = request.GET.get('name',"")
+    contact_email = request.GET.get('name',"")
+    website = request.GET.get('website',"")
+    cost = request.GET.get('cost',"")
+    user = request.GET.get('user', "NULL")
+    location = Locations.objects.get_or_create(loc_name,lan,lon,loc_place,contact_name,contact_num,contact_email,website,cost,loc_description,loc_date,user)[0]
+    location.save()
+
+
+
+
+
+
 
 
 
