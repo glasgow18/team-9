@@ -139,5 +139,3 @@ def searchTest(string):
         return results
     else:
         return locations
-
-print(searchTest("noise"))
