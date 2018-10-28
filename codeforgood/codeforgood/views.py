@@ -115,7 +115,7 @@ def addLocation(request):
     loc_name = request.GET.get('name')
     loc_place = request.GET.get('place')
     loc_description = request.GET.get('description')
-    if(loc_name && loc_place && loc_description ):
+    if(loc_name and loc_place and loc_description ):
         return django.http.HttpResponseBadRequest()
     loc_date = request.GET.get('date', "")
     lan = request.GET.get('name',"")
