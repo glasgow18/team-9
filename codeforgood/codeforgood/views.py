@@ -70,10 +70,9 @@ def list_loc_by_distance(list_loc):
     return array1
 
 
-
 def search(request):
     input = request.GET.get('query','')
-    return render(request, "search.html", {"locations":search_func(input), "search":request.GET.get("name","")})
+    return render(request, "search.html", {"locations":search_func(input), "search":request.GET.get("query","")})
 
 def search_func(input):
     good_input = input.split()
@@ -144,3 +143,4 @@ def user(request):
 	favourites = Favourites.objects.filter(id=uid)
 	favs = [Locations(id=i) for i in favourites]
 	return render(request, "user.html", {"user":User(id=uid), "favs": favs})
+
