@@ -44,6 +44,7 @@
                 </li>
                 <li class="nav-item">
                 <div class="nav-link">
+				        <li class="nav-item"><a class="nav-link" href="{% url 'add_location' %}">Submit</a></li>
                     {% if user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
                     {% else %}
