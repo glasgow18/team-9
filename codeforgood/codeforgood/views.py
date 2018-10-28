@@ -34,13 +34,13 @@ def getLocation():
     loc = data['loc']
     return loc
 
-def calculateDistance():
+def calculateDistance(lat, lon):
     location = getLocation().split(',')
     R = 6373.0
     lat1 = radians(float(location[0]))
     lon1 = radians(float(location[1]))
-    lat2 = radians(56)
-    lon2 = radians(-4)
+    lat2 = radians(lat)
+    lon2 = radians(lon)
     dlon = lon2 - lon1
     dlat = lat2 - lat1
     a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
@@ -94,24 +94,22 @@ def search(request):
                         if(location.description.lower().find(input.lower()) != -1):
                             results.append(location)
                             break;
-
-        return render(request, "search.html", {"locations":results, "search":request.GET.get("name","")})
+        list_of_locations = list_loc_by_distance(results)
+        return render(request, "search.html", {"locations":list_of_locations, "search":request.GET.get("name","")})
     else:
         return locations
 
-def list_loc_by_distance():
+def list_loc_by_distance(list_loc):
     distances = []
-    array = []
-    #locations = search()
-    for location in locations:
+    array1= list_loc[:]
+    for location in list_loc:
         distances.append(calculateDistance(location.latitude,location.longitude))
     for x in range(0,len(distances)):
         if(distances[x] > 20):
-            distances.remove(x)
-            locations.remove(x)
-            --x
-    for y in range(len(distances)):
-        array.append([locations[y]],[distances[y]])
+            distances.pop(x)
+            array1.pop(x)
+            x -=1
+    return array1
 
 
 def addLocation(request):
@@ -119,7 +117,7 @@ def addLocation(request):
     loc_name = request.GET.get('name')
     loc_place = request.GET.get('place')
     loc_description = request.GET.get('description')
-    if(loc_name and loc_place and loc_description ):
+    if not(loc_name and loc_place and loc_description):
         return django.http.HttpResponseBadRequest()
     loc_date = request.GET.get('date', "")
     lan = request.GET.get('name',"")
