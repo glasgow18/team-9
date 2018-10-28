@@ -10,7 +10,7 @@ import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'codeforgood.settings')
 import django
 django.setup()
-from codeforgood.models import Locations, Tags, Location_Tags
+from codeforgood.models import Locations, Tags, Location_Tags, Categories
 from django.shortcuts import render
 from django.http import HttpRequest
 from django.http import HttpResponse
@@ -56,7 +56,7 @@ def index(request):
 def search(request):
     input = request.GET.get('name','')
     good_input = input.split()
-    tags = Tags.objects.all()
+    categories = Categories.objects.all()
     tags_location = Location_Tags.objects.all()               #
     tags_list = []
     tags_final = []
@@ -64,9 +64,10 @@ def search(request):
     results = []
     if (good_input[0] != ""):
         for input in good_input:
-            for tag in tags:
-                if(input.lower() == tag.tag.lower()):
-                    tags_list.append(tag)
+            tags_list.append(input)
+            for tag in categories:
+                if(input.lower() == tag.subcategory.lower()):
+                    tags_list.append(tag.category)
         for tag in tags_list:
             for tag_loc in tags_location:
                 if(tag == tag_loc.tag):
