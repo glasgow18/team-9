@@ -8,6 +8,7 @@ from urllib.request import urlopen
 #from social.forms import RegistrationForm, UserProfileForm
 from django.shortcuts import render
 from codeforgood.models import Locations
+from django.http import HttpRequest
 from django.http import HttpResponse
 import datetime
 #from django.core.urlresolvers import reverse
@@ -49,7 +50,8 @@ def calculateDistance():
 def index(request):
     return render(request, 'index.html')
 
-def search(request, input):
+def search(request):
+    input = request.GET.get('name','')
     good_input = input.split()
     tags = Tags.objects.all()
     tags_location = Location_Tags.objects.all()               #
